@@ -41,7 +41,7 @@
 # COLOR needs one of these arguments: 'tty' colorizes output to ttys, but not
 # pipes. 'all' adds color characters to all output. 'none' shuts colorization
 # off.
-COLOR putty
+COLOR all
 
 # Below, there should be one TERM entry for each termtype that is colorizable
 TERM ansi
@@ -74,6 +74,7 @@ TERM mach-color
 TERM mlterm
 TERM nxterm
 TERM putty
+TERM putty-256color
 TERM rxvt
 TERM rxvt-256color
 TERM rxvt-cygwin

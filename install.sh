@@ -25,4 +25,5 @@ safeInst .bash_aliases
 safeInst .bashrc
 safeInst .bash_profile
 safeInst .dircolors
+safeInst .fancyprompt
 
