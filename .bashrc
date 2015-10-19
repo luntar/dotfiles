@@ -113,3 +113,6 @@ fi
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
+
+[ -s "/Users/john/.scm_breeze/scm_breeze.sh" ] && source "/Users/john/.scm_breeze/scm_breeze.sh"
+

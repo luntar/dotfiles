@@ -4,7 +4,7 @@
 # Tested Systems:
 # Darwin - osx
 #
-[[ "Darwin" -eq "$OSNAME" ]] && echo LOAD aliases for DARWIN
+[[ "Darwin" -eq "$(uname)" ]] && echo LOAD aliases for DARWIN
 
 alias lstree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/ /' -e 's/-/|/'"
 
@@ -30,7 +30,7 @@ alias ll='ls -alF'
 #alias grepin='grep -i -r -n'
 
 
-if [[ "Darwin" == "$OSNAME" ]]; then
+if [[ "Darwin" == "$(uname)" ]]; then
 alias vi=/Applications/MacVim.app/Contents/MacOS/Vim 
 alias lb='./osx_deploy.sh -b'
 alias mkinst='./osx_deploy.sh -p -i'
