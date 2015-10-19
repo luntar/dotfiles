@@ -1,9 +1,19 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
-[ -z "$MYRC_RAN" ] || return
 
+# Only let this run once?? 
+# CHKIT: Is this how a experienced bash user do this?
+#[ -z "$MYRC_RAN" ] || echo do nothing;return
 export MYRC_RAN=YEP
+
+# Grab the machine name
+
+
+
+
+
+OSNAME=$(uname)
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -18,11 +28,10 @@ shopt -s histappend
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
 HISTFILESIZE=2000
-
+#
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
-
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
 #shopt -s globstar
@@ -38,6 +47,7 @@ fi
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color) color_prompt=yes;;
+    putty-256color) color_prompt=yes;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -56,11 +66,13 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-if [ "$color_prompt" = yes ]; then
-    source $HOME/.fancyprompt
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
+# if [ "$color_prompt" = yes ]; then
+#
+#export PS1='\[\e[0;33m\]\u\[\e[0m\]@\[\e[0;32m\]\h\[\e[0m\]:\[\e[0;34m\]\w\[\e[0m\]\$ '
+    source $HOME/.prompt
+# else
+#     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+# fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
@@ -80,9 +92,13 @@ if [ -x /usr/bin/dircolors ]; then
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
-    alias cls=clear
-    alias via='vi ~/.bashrc +80' 
+  else
+    # eval "$(gdircolors -b ~/.dircolors)" || eval "$(gdircolors -b)"
+    # echo OSX COLORS
+    export CLICOLOR=1
+    export LSCOLORS=GxFxCxDxBxegedabagaced
 fi
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.

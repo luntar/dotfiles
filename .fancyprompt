@@ -4,6 +4,37 @@
 RESET="\[\033[000m\]"
 RED="\[\033[000;031m\]"
 
+if [[ "Darwin" == "$(uname)" ]]; then
+  set_prompt () {
+    local last_command=$?  # Must come first!
+    PS1=""
+    # Add a bright white exit status for the last command
+    PS1+='\[\e[01;37m\]$? '
+    # If it was successful, print a green check mark. Otherwise, print
+    # a red X.
+    if [[ $last_command == 0 ]]; then
+        PS1+='\[\e[01;32m\]\342\234\223 '
+    else
+        PS1+='\[\e[01;31m\]\342\234\227 '
+    fi
+    # If root, just print the host in red. Otherwise, print the current user
+    # and host in green.
+    # in 
+    if [[ $EUID == 0 ]]; then
+        PS1+='\[\e[01;31m\]\h '
+    else
+        PS1+='\[\e[01;32m\]\u@\h '
+    fi
+    # Print the working directory and prompt marker in blue, and reset
+    # the text color to the default.
+    PS1+='\[\e[01;34m\] \w \$\[\e[00m\] '
+}
+PROMPT_COMMAND='set_prompt'
+return
+   SEDARGS=-Ee
+else
+  SEDARGS=-re
+fi
 # Work out the colour code for this machine/account combo
 function colour_code_user_machine {
 	case "$USER" in
@@ -23,7 +54,7 @@ function colour_code_user_machine {
 	
 	echo -ne "\[\033[04"
 	echo -ne "$USER_COLOUR"
-	echo -ne ";03"
+	echo -ne ";04"
 	echo -ne "$MACHINE_COLOUR"
 	echo -ne "m\]"
 }
@@ -54,10 +85,10 @@ function make_status_block {
 function contract_path {
 	TRUNCATE="..."
 	wd="$(pwd \
-	      | sed -re "s:$HOME(.*):~\1:" \
-	      | sed -re "s:~/src/[^/]+/(.*):$TRUNCATE\1:" \
+	      | sed $SEDARGS "s:$HOME(.*):~\1:" \
+	      | sed $SEDARGS "s:~/src/[^/]+/(.*):$TRUNCATE\1:" \
 	     )"
-	echo -n "$wd"
+	echo -ne "$wd"
 }
 
 
@@ -70,15 +101,16 @@ function psown_my_ps {
 	working_dir="$(contract_path "$(pwd)")"
 	status_block="$(make_status_block)"
 	
-	export PS1="$user_machine $working_dir $status_block "
+#	export PS1="$user_machine $working_dir $status_block "
+	export PS1="$user_machine $status_block "
 	#export PS1="$working_dir% "
 	
 	export FRESH_TERM=""
 	
 	# Set window title to reflect path when not running a command
-	if [ -z "$MANUAL_TITLE" ]; then
-		set_title "$(contract_path "PWD")"
-	fi
+	# if [ -z "$MANUAL_TITLE" ]; then
+	# 	set_title "$(contract_path "PWD")"
+	# fi
 }
 
 
