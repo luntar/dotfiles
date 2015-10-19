@@ -5,15 +5,14 @@
 # Only let this run once?? 
 # CHKIT: Is this how a experienced bash user do this?
 #[ -z "$MYRC_RAN" ] || echo do nothing;return
+echo ok, running
 export MYRC_RAN=YEP
 
-# Grab the machine name
+if [[ "Darwin" == "$OSNAME" ]]; then
+source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash
+source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
+fi
 
-
-
-
-
-OSNAME=$(uname)
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
