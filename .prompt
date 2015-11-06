@@ -6,8 +6,16 @@ set_prompt () {
     local red='\[\e[01;31m\]'
     local green='\[\e[01;32m\]'
     local reset='\[\e[00m\]'
-    local fancyX='\342\234\227'
-    local checkmark='\342\234\223'
+
+    if [[ "$DCOS" == "Mingw" ]]
+    then
+      local fancyX='x'
+      local checkmark='ok'
+    else
+      local fancyX='\342\234\227'
+      local checkmark='\342\234\223'
+    fi
+
 
     PS1+="$white\$? "
     if [[ $last_command == 0 ]]; then
@@ -23,3 +31,4 @@ set_prompt () {
     PS1+="$blue\\w \\\$$reset "
 }
 PROMPT_COMMAND='set_prompt'
+
