@@ -1,10 +1,17 @@
+#
 # Called from .bashrc
 # Select features base on operating system.
 # $OSNAME is set to uname
 # Tested Systems:
 # Darwin - osx
 #
-[[ "Darwin" -eq "$(uname)" ]] && echo LOAD aliases for DARWIN
+
+# My mingw insall will return MINGW32_NT-6.1, the .1 will cause an error in the compare code
+# Use sed to remove the '.'
+UN=$(uname | sed "s/\.//g")
+
+[[ "Darwin" -eq "$UN" ]] && echo LOAD aliases for DARWIN
+[[ $UN == *"MINGW"* ]] && echo LOAD aliases for MINGW
 
 alias lstree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/ /' -e 's/-/|/'"
 
@@ -18,17 +25,29 @@ alias cls=clear
 alias la=alias
 alias lag='alias -p | grep -i'
 alias doa='source ~/.bash_aliases'
-alias via='vi ~/dotfiles/.bash_aliases'
+alias via='vi ~/.bash_aliases'
 
 # configure ls, grep, etc...
-alias ls='ls -G'
-alias ll='ls -alF'
+alias vih='sudo vi /etc/hosts'
+
+alias cls=clear
+alias lstree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/ /' -e 's/-/|/'"
+alias vip='vi ~/.bash_profile;source ~/.bash_profile'
 
 #alias grep='grep --color=auto'
 #alias fgrep='fgrep --color=auto'
 #alias egrep='egrep --color=auto'
 #alias grepin='grep -i -r -n'
 
+
+if [[ $UN == *"MINGW"* ]] 
+then
+  alias ls='ls --color'
+  alias ll='ls -alF --color'
+  alias vi=gvim
+  alias s='cd /c/proj/dc/projects/spl'
+  alias gop='cd /c/proj/dc/projects/'
+fi
 
 if [[ "Darwin" == "$(uname)" ]]; then
 alias vi=/Applications/MacVim.app/Contents/MacOS/Vim 
@@ -88,8 +107,7 @@ alias gs='git status'
 alias ll='ls -alFG'
 alias lc='ls -G'
 alias gonk='cd ~/proj/nk/'
-alias cls=clear
-alias via='vi ~/ge/alias.cfg;doa'
+alias via='vi ~/.bash_alias;doa'
 alias doa='source ~/ge/alias.cfg'
 alias gola='cd /Library/Application\ Support'
 alias midimon_off='mv ~/Library/Audio/MIDI\ Drivers/MIDI\ Monitor.plugin ~/Library/Audio/MIDI\ Drivers/MIDI\ Monitor.plugin_off'
@@ -105,12 +123,9 @@ alias la=alias
 alias vihosts='sudo vi /etc/hosts'
 alias showhidden='defaults write com.apple.finder AppleShowAllFiles TRUE'
 alias hidehidden='defaults write com.apple.finder AppleShowAllFiles FALSE'
-alias lstree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/ /' -e 's/-/|/'"
 alias exp="open "
 alias go="open -R "
 alias grepin="grep -i -r -n"
-alias vip='vi ~/.bash_profile;source ~/.bash_profile'
-alias vih='sudo vi /etc/hosts'
 alias meunload='launchctl unload /Library/LaunchAgents/com.nektartech.macroedit.plist'
 alias meload='launchctl load /Library/LaunchAgents/com.nektartech.macroedit.plist'
 alias mestart='mkdir /Library/Application\ Support/Nektar/Data/start_macroedit;rmdir /Library/Application\ Support/Nektar/Data/start_macroedit'
@@ -147,6 +162,7 @@ function cg {
 }
 
 fi # DARWIN
+
 
 function lscolor {
 # FROM: http://www.tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html
