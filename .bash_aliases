@@ -5,13 +5,9 @@
 # Tested Systems:
 # Darwin - osx
 #
+[[ "Darwin" == "$DCOS" ]] && echo LOAD aliases for DARWIN
 
-# My mingw insall will return MINGW32_NT-6.1, the .1 will cause an error in the compare code
-# Use sed to remove the '.'
-UN=$(uname | sed "s/\.//g")
-
-[[ "Darwin" -eq "$UN" ]] && echo LOAD aliases for DARWIN
-[[ $UN == *"MINGW"* ]] && echo LOAD aliases for MINGW
+[[ "Mingw" == "$DCOS" ]] && echo LOAD aliases for MINGW
 
 alias lstree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/ /' -e 's/-/|/'"
 
@@ -40,7 +36,7 @@ alias vip='vi ~/.bash_profile;source ~/.bash_profile'
 #alias grepin='grep -i -r -n'
 
 
-if [[ $UN == *"MINGW"* ]] 
+if [[ "$DCOS" -eq "Mingw" ]] 
 then
   alias ls='ls --color'
   alias ll='ls -alF --color'

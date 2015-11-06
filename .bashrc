@@ -13,6 +13,10 @@ source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-complet
 source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
 fi
 
+UN=$(uname | sed "s/\.//g")
+[[ "Darwin" -eq "$UN" ]] && export DCOS=Darwin
+[[ $UN == *"MINGW"* ]] && export DCOS=Mingw 
+[ -z "$DCOS" ] && export DCOS = $(uname)
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
