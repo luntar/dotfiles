@@ -24,9 +24,9 @@ set_prompt () {
         PS1+="$red$fancyX "
     fi
     if [[ $EUID == 0 ]]; then
-        PS1+="$red\\h "
+        PS1+="$red "
     else
-        PS1+="$green\\u@\\h "
+        PS1+="$green "
     fi
     PS1+="$blue\\w \\\$$reset "
 }
