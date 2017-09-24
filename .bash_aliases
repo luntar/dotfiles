@@ -8,7 +8,6 @@
 [[ "Darwin" == "$DCOS" ]] && echo LOAD aliases for DARWIN
 
 [[ "Mingw" == "$DCOS" ]] && echo LOAD aliases for MINGW
-
 alias lstree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/ /' -e 's/-/|/'"
 
 # shortcuts
@@ -21,7 +20,7 @@ alias cls=clear
 alias la=alias
 alias lag='alias -p | grep -i'
 alias doa='source ~/.bash_aliases'
-alias via='vi ~/.bash_aliases'
+#alias via='vi ~/.bash_aliases'
 
 # configure ls, grep, etc...
 alias vih='sudo vi /etc/hosts'
@@ -46,7 +45,7 @@ then
 fi
 
 if [[ "Darwin" == "$(uname)" ]]; then
-alias vi=/Applications/MacVim.app/Contents/MacOS/Vim 
+alias vi=mvim
 alias lb='./osx_deploy.sh -b'
 alias mkinst='./osx_deploy.sh -p -i'
 alias s='cd /Users/john/src/spl'
@@ -93,7 +92,6 @@ alias got='cd ~/src/tools'
 alias gosa='cd ~/proj/bk/ot/spring-awake'
 alias vm='dvtm -m ^o'
 alias lsusb='system_profiler SPUSBDataType | grep -v "USB\:" | grep -v "USB High-Speed Bus\:" | grep "\(\:$\|^.*Product\|^[ ]*Vendor\|Current Avail\)"'
-alias vipmt='vi ~/ge/prompt.bash;source ~/ge/prompt.bash'
 alias h=history
 alias svnm='svn status | grep ^M'
 alias gop2='cd /Users/john/proj/p2;source nk.sh -v'
@@ -103,8 +101,8 @@ alias gs='git status'
 alias ll='ls -alFG'
 alias lc='ls -G'
 alias gonk='cd ~/proj/nk/'
-alias via='vi ~/.bash_alias;doa'
-alias doa='source ~/ge/alias.cfg'
+alias via='vi ~/.bash_aliases;doa'
+alias doa='source ~/.bash_aliases'
 alias gola='cd /Library/Application\ Support'
 alias midimon_off='mv ~/Library/Audio/MIDI\ Drivers/MIDI\ Monitor.plugin ~/Library/Audio/MIDI\ Drivers/MIDI\ Monitor.plugin_off'
 alias midimon_on='mv ~/Library/Audio/MIDI\ Drivers/MIDI\ Monitor.plugin_off ~/Library/Audio/MIDI\ Drivers/MIDI\ Monitor.plugin'
