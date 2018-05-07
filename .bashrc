@@ -11,6 +11,7 @@ export MYRC_RAN=YEP
 if [[ "Darwin" == "$OSNAME" ]]; then
 source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash
 source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
+export PATH="/usr/local/sbin:$PATH"
 fi
 
 UN=$(uname | sed "s/\.//g")
@@ -119,4 +120,7 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 [ -s "/Users/john/.scm_breeze/scm_breeze.sh" ] && source "/Users/john/.scm_breeze/scm_breeze.sh"
+
+bind '"\e[3~": delete-char'
+pwd
 
