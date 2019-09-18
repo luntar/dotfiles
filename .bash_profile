@@ -1,2 +1,2 @@
-[ -z "$MYRC_RAN" ] && source .bashrc
+[ -z "$MYRC_RAN" ] && source ~/.bashrc
 

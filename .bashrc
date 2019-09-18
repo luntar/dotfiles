@@ -15,8 +15,11 @@ export PATH="/usr/local/sbin:$PATH"
 fi
 
 UN=$(uname | sed "s/\.//g")
+echo $UN
 [[ "Darwin" -eq "$UN" ]] && export DCOS=Darwin
-[[ $UN == *"MINGW"* ]] && export DCOS=Mingw 
+[[ $UN == *"MINGW64"* ]] && export DCOS=Mingw64 
+[[ $UN == *"MINGW"* ]] && export DCOS=Mingw64 
+[[ $UN == *"MSYS"* ]] && export DCOS=Mingw
 [ -z "$DCOS" ] && export DCOS = $(uname)
 
 # If not running interactively, don't do anything

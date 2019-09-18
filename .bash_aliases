@@ -9,18 +9,20 @@
 
 [[ "Mingw" == "$DCOS" ]] && echo LOAD aliases for MINGW
 alias lstree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/ /' -e 's/-/|/'"
-
+alias exp="explorer.exe" 
 # shortcuts
 alias vip='vi ~/.bash_profile;source ~/.bash_profile'
+alias np='/c/Program\ Files\ \(x86\)/Notepad++/notepad++.exe'
 alias vih='sudo vi /etc/hosts'
 alias h=history
 alias cls=clear
-
+alias l='ls -alF'
 # manage aliases
 alias la=alias
 alias lag='alias -p | grep -i'
 alias doa='source ~/.bash_aliases'
-#alias via='vi ~/.bash_aliases'
+alias via='vi ~/.bash_aliases'
+alias virc='vi ~/.bashrc'
 
 # configure ls, grep, etc...
 alias vih='sudo vi /etc/hosts'
@@ -28,7 +30,10 @@ alias vih='sudo vi /etc/hosts'
 alias cls=clear
 alias lstree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/ /' -e 's/-/|/'"
 alias vip='vi ~/.bash_profile;source ~/.bash_profile'
-
+alias godct='cd /c/proj/dc/projects/dctester'
+alias godc='cd /c/proj/dc'
+alias gofw='cd /c/proj/dc/projects/update'
+alias gobs='cd /c/proj/dc/projects/bigsky_plug'
 #alias grep='grep --color=auto'
 #alias fgrep='fgrep --color=auto'
 #alias egrep='egrep --color=auto'
@@ -36,12 +41,13 @@ alias vip='vi ~/.bash_profile;source ~/.bash_profile'
 
 
 if [[ "$DCOS" -eq "Mingw" ]] 
+  echo MINGW SECTION LINE ~42ish
 then
   alias ls='ls --color'
   alias ll='ls -alF --color'
   alias vi=gvim
   alias s='cd /c/proj/dc/projects/nixie'
-  alias gop='cd /c/proj/dc/projects/'
+  alias gop='cd /e/proj/dc/projects/'
 fi
 
 if [[ "Darwin" == "$(uname)" ]]; then
@@ -87,7 +93,6 @@ alias gonkdev='cd ~/proj/nk/projects'
 alias govb='cd ~/.vim/bundle/'
 alias viv='vi ~/.vimrc'
 alias vic='vi ~/.vim/colors/jellybeans.vim'
-alias godc='cd ~/src/looper/buzz/apps'
 alias goua='cd ~src/ua/fw2plug' 
 alias got='cd ~/src/tools'
 alias gosa='cd ~/proj/bk/ot/spring-awake'
