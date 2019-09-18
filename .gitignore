@@ -1,3 +1,4 @@
 undo.sh
 /undo_data
+*.orig
 
